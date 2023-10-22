@@ -1,24 +1,38 @@
-const { Datatypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
-module.exports = (sequelize) => {
-  sequelize.define("user", {
-    id: {
-      type: Datatypes.UUID,
-      primaryKey: true,
+const USER_TABLE = "users";
+
+const createUserModel = (sequelize) => {
+  return sequelize.define(
+    "User",
+    {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      username: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        field: "username",
+      },
+      password: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        field: "password",
+      },
+      email: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        field: "email",
+      },
     },
-    username: {
-      type: Datatypes.STRING(50),
-      unique: true,
-      allowNull: false,
-    },
-    password: {
-      type: Datatypes.STRING(128),
-      allowNull: false,
-    },
-    email:{
-        type:Datatypes.STRING(128),
-        unique:true,
-        allowNull:false
-        }
-  });
+    {
+      tableName: USER_TABLE,
+      timestamps: false,
+    }
+  );
 };
+
+module.exports = { createUserModel };
