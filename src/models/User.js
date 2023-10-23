@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 const USER_TABLE = "users";
 
-const createUserModel = (sequelize) => {
+const User = (sequelize) => {
   return sequelize.define(
     "User",
     {
@@ -35,4 +35,4 @@ const createUserModel = (sequelize) => {
   );
 };
 
-module.exports = { createUserModel };
+module.exports = User;
