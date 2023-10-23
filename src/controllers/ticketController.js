@@ -1,6 +1,7 @@
 const { Ticket } = require("../models");
 
-// Obtener todos los tickets
+// GET ALL
+
 exports.getAllTickets = async (req, res) => {
   try {
     const tickets = await Ticket.findAll();
@@ -10,7 +11,8 @@ exports.getAllTickets = async (req, res) => {
   }
 };
 
-// Crear un nuevo ticket
+// CREATE
+
 exports.createTicket = async (req, res) => {
   const { cliente, total, fecha } = req.body;
 
@@ -21,5 +23,3 @@ exports.createTicket = async (req, res) => {
     res.status(400).json({ error: "Error al crear el ticket" });
   }
 };
-
-// Otras funciones de controlador para rutas de actualización, eliminación, etc.

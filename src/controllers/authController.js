@@ -1,4 +1,4 @@
-const { User } = require("../models"); // Asegúrate de importar el modelo de usuario
+const { User } = require("../models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { SECRET } = process.env;
