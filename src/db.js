@@ -3,16 +3,18 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, PRODUCTION, DATABASE_URL, DB_NAME } =
+  process.env;
 
-// Db Config
-const sequelize = new Sequelize(
-  `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-  {
-    logging: false,
-    native: false,
+// Sequelize > MySQL - Config
+
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: "ns5.todositios.com",
+  dialect: "mysql",
+  dialectOptions: {
+    connectTimeout: 30000 // Aumenta el tiempo de espera a 30 segundos (o el valor que consideres apropiado).
   }
-);
+});
 
 const basename = path.basename(__filename);
 
