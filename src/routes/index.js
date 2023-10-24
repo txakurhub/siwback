@@ -7,7 +7,6 @@ const ticketRoutes = require("./ticketRouter");
 
 // Routes
 router.use("/auth", authRoutes);
-router.use("/users", userRoutes);
 router.use("/tickets", ticketRoutes);
 
 module.exports = router;
