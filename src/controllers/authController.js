@@ -20,7 +20,7 @@ exports.signup = async (req, res) => {
       email,
     });
 
-    res.json({newUser, username, email});
+    res.json({ newUser, username, email });
   } catch (error) {
     res.status(500).json({ error: "Error en el registro de usuario" });
   }
@@ -46,7 +46,7 @@ exports.login = async (req, res) => {
       expiresIn: "1y",
     });
 
-    res.json({ token, email });
+    res.json({ token, ...user.dataValues });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Error en el inicio de sesión" });
@@ -56,23 +56,23 @@ exports.login = async (req, res) => {
 // UPDATE
 
 exports.update = async (req, res) => {
-  const { username, password, newUsername, newPassword, newEmail } = req.body;
-
+  const { email, newUsername, newEmail } = req.body;
   try {
-    const user = await User.findOne({ where: { username } });
+    const user = await User.findOne({ where: { email } });
     if (!user) {
+      console.log("ENTRO AL !USER");
       return res.status(401).json({ error: "Credenciales inválidas" });
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) {
-      return res.status(401).json({ error: "Credenciales inválidas" });
-    }
+    // const passwordMatch = await bcrypt.compare(password, user.password);
+    // if (!passwordMatch) {
+    //   return res.status(401).json({ error: "Credenciales inválidas" });
+    // }
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    // const hashedPassword = await bcrypt.hash(newPassword, 10);
 
+    // user.password = hashedPassword;
     user.username = newUsername;
-    user.password = hashedPassword;
     user.email = newEmail;
 
     await user.save();
