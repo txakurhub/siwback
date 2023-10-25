@@ -1,13 +1,12 @@
-const { User } = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { User } = require("../db");
 const { SECRET } = process.env;
 
 // SIGN UP
 
 exports.signup = async (req, res) => {
-  const { username, password } = req.body;
-
+  const { username, password, email } = req.body;
   try {
     const existingUser = await User.findOne({ where: { username } });
     if (existingUser) {
@@ -15,9 +14,13 @@ exports.signup = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({ username, password: hashedPassword });
+    const newUser = await User.create({
+      username,
+      password: hashedPassword,
+      email,
+    });
 
-    res.json(newUser);
+    res.json({newUser, username, email});
   } catch (error) {
     res.status(500).json({ error: "Error en el registro de usuario" });
   }
@@ -26,10 +29,10 @@ exports.signup = async (req, res) => {
 // LOGIN
 
 exports.login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ where: { username } });
+    const user = await User.findOne({ where: { email } });
     if (!user) {
       return res.status(401).json({ error: "Credenciales inválidas" });
     }
@@ -43,8 +46,9 @@ exports.login = async (req, res) => {
       expiresIn: "1y",
     });
 
-    res.json({ token });
+    res.json({ token, email });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Error en el inicio de sesión" });
   }
 };
