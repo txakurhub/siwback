@@ -6,14 +6,12 @@ const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, PRODUCTION, DATABASE_URL, DB_NAME } =
   process.env;
 
-// Sequelize > MySQL - Config
-
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: "ns5.todositios.com",
   dialect: "mysql",
   dialectOptions: {
-    connectTimeout: 30000 // Aumenta el tiempo de espera a 30 segundos (o el valor que consideres apropiado).
-  }
+    connectTimeout: 30000,
+  },
 });
 
 const basename = path.basename(__filename);
@@ -31,13 +29,10 @@ fs.readdirSync(path.join(__dirname, "/models"))
 
 modelDefiners.forEach((model) => model(sequelize));
 
-// Models
 const { User, Ticket } = sequelize.models;
 
-// Relation
-User.hasMany(Ticket);
-Ticket.belongsTo(User);
-
+User.hasMany(Ticket, { foreignKey: "UserId" });
+Ticket.belongsTo(User, { foreignKey: "UserId" });
 module.exports = {
   User,
   Ticket,
