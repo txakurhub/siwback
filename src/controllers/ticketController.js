@@ -1,4 +1,4 @@
-const { Ticket } = require("../models/Ticket");
+const { Ticket } = require("../db");
 
 // GET ALL
 
@@ -14,12 +14,17 @@ exports.getAllTickets = async (req, res) => {
 // CREATE
 
 exports.createTicket = async (req, res) => {
-  const { cliente, total, fecha } = req.body;
+  const { cliente, total } = req.body;
 
   try {
-    const newTicket = await Ticket.create({ cliente, total, fecha });
+    const newTicket = await Ticket.create({
+      cliente,
+      total,
+      fecha: new Date(),
+    });
     res.json(newTicket);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: "Error al crear el ticket" });
   }
 };
