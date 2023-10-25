@@ -13,7 +13,7 @@ const Ticket = (sequelize) => {
         primaryKey: true,
       },
       cliente: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       total: {
@@ -30,6 +30,9 @@ const Ticket = (sequelize) => {
       timestamps: false,
     }
   );
+};
+Ticket.associate = (models) => {
+  Ticket.belongsTo(models.User, { foreignKey: "cliente" });
 };
 
 module.exports = Ticket;

@@ -7,7 +7,7 @@ const User = (sequelize) => {
     "User",
     {
       id: {
-        allowNull: false,
+        allowNull: true,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -34,5 +34,7 @@ const User = (sequelize) => {
     }
   );
 };
-
+User.associate = (models) => {
+  User.hasMany(models.Ticket, { foreignKey: "cliente" });
+};
 module.exports = User;
