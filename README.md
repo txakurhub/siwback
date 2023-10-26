@@ -5,7 +5,7 @@
 
 Puedes ver una versión actual del proyecto [aquí](https://siw-front.vercel.app/)
 
-## Cómo instalarlo y correr el proyecto localmente en cuatro pasos
+## Cómo instalarlo y correr el proyecto localmente
 
 Detalles importantes a tener en cuenta:
 
