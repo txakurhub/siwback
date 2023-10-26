@@ -99,7 +99,7 @@ El proyecto consta de una aplicación web que permite a los usuarios, registrars
 
 ### Tickets:
 
-- GET /tickets -> Obtiene todos las facturas en la base de datos
+- GET /tickets -> Obtiene todas las facturas en la base de datos
 - POST /tickets -> Crea una nueva factura en la API, espera:
 
 ```
