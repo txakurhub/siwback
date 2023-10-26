@@ -24,7 +24,6 @@ exports.createTicket = async (req, res) => {
     });
     res.json(newTicket);
   } catch (error) {
-    console.log(error);
     res.status(400).json({ error: "Error al crear el ticket" });
   }
 };
