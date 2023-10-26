@@ -48,7 +48,6 @@ exports.login = async (req, res) => {
 
     res.json({ token, ...user.dataValues });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: "Error en el inicio de sesión" });
   }
 };
@@ -56,11 +55,10 @@ exports.login = async (req, res) => {
 // UPDATE
 
 exports.update = async (req, res) => {
-  const { email, newUsername, newEmail } = req.body;
+  const { email, newUsername, newEmail, newP } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      console.log("ENTRO AL !USER");
       return res.status(401).json({ error: "Credenciales inválidas" });
     }
 
@@ -93,24 +91,40 @@ exports.update = async (req, res) => {
 // GET USER INFO
 
 exports.getUserInfo = async (req, res) => {
-  const userId = req.params.id;
-
+  const { email } = req.body;
   try {
-    const user = await User.findByPk(userId);
+    const user = await User.findOne({ where: { email } });
     if (!user) {
       return res.status(404).json({ error: "Cliente no encontrado" });
     }
-
-    res.status(200).json({
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-      },
-    });
+    res.status(200).json(user);
   } catch (error) {
     res
       .status(500)
       .json({ error: "Error al recuperar la información del cliente" });
+  }
+};
+
+// RECOVERY PASSWORD
+
+exports.recovery = async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res
+        .status(401)
+        .json({ error: "No se encontró usuario con ese correo" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+
+    await user.save();
+
+    res.status(200).json({ message: "Usuario actualizado con éxito" });
+  } catch (error) {
+    res.status(500).json({ error: "Error en la recuperación de contraseña" });
   }
 };
