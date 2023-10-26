@@ -66,13 +66,46 @@ El proyecto consta de una aplicación web que permite a los usuarios, registrars
 
 ### Auth:
 
-- POST /auth/login -> Login del usuario en la API - espera {"email":"correo@dom.com", "password":"contraseña"}
-- POST /auth/signup -> Sign up del usuario en la API - espera { "username": "nombredeusuario","email": "correo@dom.com", "password": "password"}
-- POST /auth/getuser -> Devuelve la información del usuario en la API - espera {"email":"correo@dom.com"}
-- PUT /auth/update -> Modifica la información del usuario en la API - espera {"email":"correo@dom.com", "newUsername":"nuevonombre", "newEmail":"nuevo@correo.com" }
-- PUT /auth/recovery -> Modifica la contraseña del usuario en la API - espera {"email":"correo@dom.com"}
+- POST /auth/login -> Login del usuario en la API, espera:
+
+```
+  {"email":"correo@dom.com", "password":"contraseña"}
+
+```
+
+- POST /auth/signup -> Sign up del usuario en la API, espera:
+
+```
+ { "username": "nombredeusuario","email": "correo@dom.com", "password": "password"}
+```
+
+- POST /auth/getuser -> Devuelve la información del usuario en la API, espera:
+
+```
+ {"email":"correo@dom.com"}
+```
+
+- PUT /auth/update -> Modifica la información del usuario en la API, espera:
+
+```
+ {"email":"correo@dom.com", "newUsername":"nuevonombre", "newEmail":"nuevo@correo.com" }
+```
+
+- PUT /auth/recovery -> Modifica la contraseña del usuario en la API, espera:
+
+```
+ {"email":"correo@dom.com"}
+```
 
 ### Tickets:
 
 - GET /tickets -> Obtiene todos las facturas en la base de datos
-- POST /tickets -> Crea una nueva factura en la API - espera {"cliente":"id", "total":"123" }
+- POST /tickets -> Crea una nueva factura en la API, espera:
+
+```
+ {"cliente":"id", "total":"123" }
+```
+
+```
+
+```
