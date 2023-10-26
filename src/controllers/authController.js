@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
 // UPDATE
 
 exports.update = async (req, res) => {
-  const { email, newUsername, newEmail, newP } = req.body;
+  const { email, newUsername, newEmail } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
