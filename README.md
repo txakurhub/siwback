@@ -5,7 +5,7 @@
 
 Puedes ver una versión actual del proyecto [aquí](https://siw-front.vercel.app/)
 
-## Cómo instalarlo y correr el proyecto localmente
+## Cómo instalar y correr el proyecto localmente
 
 Detalles importantes a tener en cuenta:
 
@@ -28,7 +28,7 @@ $ npm install
 
 ### 3. Configurar las variables de entorno
 
-Deberá crear o tener creada una base de datos, deberá cargar los siguientes datos para la correcta conexión con la misma.
+Deberá crear o tener creada una base de datos, a la cual le deberá cargar los siguientes datos para la correcta conexión con la misma.
 
 ```
 $ DB_USER
