@@ -105,7 +105,3 @@ El proyecto consta de una aplicación web que permite a los usuarios, registrars
 ```
  {"cliente":"id", "total":"123" }
 ```
-
-```
-
-```
